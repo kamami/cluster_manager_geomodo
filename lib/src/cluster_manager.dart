@@ -121,9 +121,7 @@ class ClusterManager<T extends ClusterItem> {
       inflatedBounds = _inflateBounds(mapBounds);
     }
 
-    List<T> visibleItems = items.where((i) {
-      return inflatedBounds.contains(i.location);
-    }).toList();
+    List<T> visibleItems = items.toList();
 
     if (stopClusteringZoom != null && _zoom >= stopClusteringZoom!)
       return visibleItems.map((i) => Cluster<T>.fromItems([i])).toList();
