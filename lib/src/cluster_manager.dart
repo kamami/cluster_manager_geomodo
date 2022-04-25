@@ -109,6 +109,7 @@ class ClusterManager<T extends ClusterItem> {
 
   /// Retrieve cluster markers
   Future<List<Cluster<T>>> getMarkers() async {
+    print("GETMARKERS");
     if (_mapId == null) return List.empty();
 
     final LatLngBounds mapBounds = await GoogleMapsFlutterPlatform.instance
