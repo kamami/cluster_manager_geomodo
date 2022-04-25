@@ -4,8 +4,8 @@ import 'dart:ui';
 
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
-import 'package:google_maps_cluster_manager/google_maps_cluster_manager.dart';
-import 'package:google_maps_cluster_manager/src/max_dist_clustering.dart';
+import 'package:cluster_manager_geomodo/cluster_manager_geomodo.dart';
+import 'package:cluster_manager_geomodo/src/max_dist_clustering.dart';
 import 'package:google_maps_flutter_platform_interface/google_maps_flutter_platform_interface.dart';
 
 enum ClusterAlgorithm { GEOHASH, MAX_DIST }

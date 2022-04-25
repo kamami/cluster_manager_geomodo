@@ -1,4 +1,4 @@
-import '../google_maps_cluster_manager.dart';
+import '../cluster_manager_geomodo.dart';
 import 'common.dart';
 
 class _MinDistCluster<T extends ClusterItem> {

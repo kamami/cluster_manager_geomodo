@@ -1,4 +1,4 @@
-library google_maps_cluster_manager;
+library cluster_manager_geomodo;
 
 export 'src/cluster_manager.dart';
 export 'src/cluster_item.dart';
