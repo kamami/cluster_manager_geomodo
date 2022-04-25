@@ -122,7 +122,7 @@ class ClusterManager<T extends ClusterItem> {
 
     List<T> visibleItems = items.toList();
 
-    if (stopClusteringZoom != null && _zoom <= stopClusteringZoom!)
+    if (stopClusteringZoom != null && _zoom >= stopClusteringZoom!)
       return visibleItems.map((i) => Cluster<T>.fromItems([i])).toList();
 
     if (clusterAlgorithm == ClusterAlgorithm.GEOHASH ||
