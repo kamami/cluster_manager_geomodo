@@ -1,4 +1,3 @@
-import 'dart:math';
 import 'dart:typed_data';
 import 'dart:ui';
 
@@ -64,7 +63,7 @@ class ClusterManager<T extends ClusterItem> {
   /// Last known zoom
   late double _zoom;
 
-  final double _maxLng = 180 - pow(10, -10.0) as double;
+  // final double _maxLng = 180 - pow(10, -10.0) as double;
 
   /// Set Google Map Id for the cluster manager
   void setMapId(int mapId, {bool withUpdate = true}) async {
@@ -109,22 +108,21 @@ class ClusterManager<T extends ClusterItem> {
 
   /// Retrieve cluster markers
   Future<List<Cluster<T>>> getMarkers() async {
-    print("GETMARKERS");
     if (_mapId == null) return List.empty();
 
-    final LatLngBounds mapBounds = await GoogleMapsFlutterPlatform.instance
-        .getVisibleRegion(mapId: _mapId!);
+    // final LatLngBounds mapBounds = await GoogleMapsFlutterPlatform.instance
+    //     .getVisibleRegion(mapId: _mapId!);
 
-    late LatLngBounds inflatedBounds;
-    if (clusterAlgorithm == ClusterAlgorithm.GEOHASH) {
-      inflatedBounds = _inflateBounds(mapBounds);
-    } else {
-      inflatedBounds = _inflateBounds(mapBounds);
-    }
+    // late LatLngBounds inflatedBounds;
+    // if (clusterAlgorithm == ClusterAlgorithm.GEOHASH) {
+    //   inflatedBounds = _inflateBounds(mapBounds);
+    // } else {
+    //   inflatedBounds = _inflateBounds(mapBounds);
+    // }
 
     List<T> visibleItems = items.toList();
 
-    if (stopClusteringZoom != null && _zoom >= stopClusteringZoom!)
+    if (stopClusteringZoom != null && _zoom <= stopClusteringZoom!)
       return visibleItems.map((i) => Cluster<T>.fromItems([i])).toList();
 
     if (clusterAlgorithm == ClusterAlgorithm.GEOHASH ||
@@ -141,31 +139,31 @@ class ClusterManager<T extends ClusterItem> {
     }
   }
 
-  LatLngBounds _inflateBounds(LatLngBounds bounds) {
-    // Bounds that cross the date line expand compared to their difference with the date line
-    double lng = 0;
-    if (bounds.northeast.longitude < bounds.southwest.longitude) {
-      lng = extraPercent *
-          ((180.0 - bounds.southwest.longitude) +
-              (bounds.northeast.longitude + 180));
-    } else {
-      lng = extraPercent *
-          (bounds.northeast.longitude - bounds.southwest.longitude);
-    }
+  // LatLngBounds _inflateBounds(LatLngBounds bounds) {
+  //   // Bounds that cross the date line expand compared to their difference with the date line
+  //   double lng = 0;
+  //   if (bounds.northeast.longitude < bounds.southwest.longitude) {
+  //     lng = extraPercent *
+  //         ((180.0 - bounds.southwest.longitude) +
+  //             (bounds.northeast.longitude + 180));
+  //   } else {
+  //     lng = extraPercent *
+  //         (bounds.northeast.longitude - bounds.southwest.longitude);
+  //   }
 
-    // Latitudes expanded beyond +/- 90 are automatically clamped by LatLng
-    double lat =
-        extraPercent * (bounds.northeast.latitude - bounds.southwest.latitude);
+  //   // Latitudes expanded beyond +/- 90 are automatically clamped by LatLng
+  //   double lat =
+  //       extraPercent * (bounds.northeast.latitude - bounds.southwest.latitude);
 
-    double eLng = (bounds.northeast.longitude + lng).clamp(-_maxLng, _maxLng);
-    double wLng = (bounds.southwest.longitude - lng).clamp(-_maxLng, _maxLng);
+  //   double eLng = (bounds.northeast.longitude + lng).clamp(-_maxLng, _maxLng);
+  //   double wLng = (bounds.southwest.longitude - lng).clamp(-_maxLng, _maxLng);
 
-    return LatLngBounds(
-      southwest: LatLng(bounds.southwest.latitude - lat, wLng),
-      northeast:
-          LatLng(bounds.northeast.latitude + lat, lng != 0 ? eLng : _maxLng),
-    );
-  }
+  //   return LatLngBounds(
+  //     southwest: LatLng(bounds.southwest.latitude - lat, wLng),
+  //     northeast:
+  //         LatLng(bounds.northeast.latitude + lat, lng != 0 ? eLng : _maxLng),
+  //   );
+  // }
 
   int _findLevel(List<double> levels) {
     for (int i = levels.length - 1; i >= 0; i--) {
