@@ -118,7 +118,7 @@ class ClusterManager<T extends ClusterItem> {
     if (clusterAlgorithm == ClusterAlgorithm.GEOHASH) {
       inflatedBounds = _inflateBounds(mapBounds);
     } else {
-      inflatedBounds = mapBounds;
+      inflatedBounds = _inflateBounds(mapBounds);
     }
 
     List<T> visibleItems = items.where((i) {
