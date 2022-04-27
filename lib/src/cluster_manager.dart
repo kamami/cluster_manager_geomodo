@@ -123,7 +123,8 @@ class ClusterManager<T extends ClusterItem> {
     //   inflatedBounds = _inflateBounds(mapBounds);
     // }
 
-    List<T> visibleItems = items.where((element) => element != selectedItem).toList();
+    List<T> visibleItems =
+        items.where((element) => element != selectedItem).toList();
 
     if (stopClusteringZoom != null && _zoom >= stopClusteringZoom!)
       return visibleItems.map((i) => Cluster<T>.fromItems([i])).toList();
@@ -136,8 +137,13 @@ class ClusterManager<T extends ClusterItem> {
           level: level);
       return markers;
     } else {
-      List<Cluster<T>> markers = selectedItem != null ?
-          [..._computeClustersWithMaxDist(visibleItems, _zoom), Cluster<T>.fromItems([selectedItem!])] : _computeClustersWithMaxDist(visibleItems, _zoom);
+      print("Right IF ELSE");
+      List<Cluster<T>> markers = selectedItem != null
+          ? [
+              ..._computeClustersWithMaxDist(visibleItems, _zoom),
+              Cluster<T>.fromItems([selectedItem!])
+            ]
+          : _computeClustersWithMaxDist(visibleItems, _zoom);
       return markers;
     }
   }
