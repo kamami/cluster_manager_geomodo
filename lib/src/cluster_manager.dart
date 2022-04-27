@@ -132,7 +132,8 @@ class ClusterManager<T extends ClusterItem> {
         items.where((element) => element != selectedItem).toList();
 
     if (stopClusteringZoom != null && _zoom >= stopClusteringZoom!)
-      return visibleItems.map((i) => Cluster<T>.fromItems([i])).toList();
+      return selectedItem != null
+          ? items.map((i) => Cluster<T>.fromItems([i])).toList() : visibleItems.map((i) => Cluster<T>.fromItems([i])).toList();
 
     if (clusterAlgorithm == ClusterAlgorithm.GEOHASH ||
         visibleItems.length >= maxItemsForMaxDistAlgo) {
