@@ -23,6 +23,7 @@ class ClusterManager<T extends ClusterItem> {
       this.maxItemsForMaxDistAlgo = 200,
       this.clusterAlgorithm = ClusterAlgorithm.GEOHASH,
       this.maxDistParams,
+      this.selectedItem,
       this.stopClusteringZoom})
       : this.markerBuilder = markerBuilder ?? _basicMarkerBuilder,
         assert(levels.length <= precision);
@@ -46,6 +47,8 @@ class ClusterManager<T extends ClusterItem> {
   final ClusterAlgorithm clusterAlgorithm;
 
   final MaxDistParams? maxDistParams;
+
+  final T? selectedItem;
 
   /// Zoom level to stop cluster rendering
   final double? stopClusteringZoom;
@@ -120,7 +123,7 @@ class ClusterManager<T extends ClusterItem> {
     //   inflatedBounds = _inflateBounds(mapBounds);
     // }
 
-    List<T> visibleItems = items.toList();
+    List<T> visibleItems = items.where((element) => element != selectedItem).toList();
 
     if (stopClusteringZoom != null && _zoom >= stopClusteringZoom!)
       return visibleItems.map((i) => Cluster<T>.fromItems([i])).toList();
@@ -134,7 +137,7 @@ class ClusterManager<T extends ClusterItem> {
       return markers;
     } else {
       List<Cluster<T>> markers =
-          _computeClustersWithMaxDist(visibleItems, _zoom);
+          [..._computeClustersWithMaxDist(visibleItems, _zoom), Cluster<T>.fromItems([selectedItem!])];
       return markers;
     }
   }
