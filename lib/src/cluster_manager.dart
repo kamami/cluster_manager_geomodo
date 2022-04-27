@@ -138,6 +138,7 @@ class ClusterManager<T extends ClusterItem> {
       return markers;
     } else {
       print("Right IF ELSE");
+      print("SelectedITem: $selectedItem");
       List<Cluster<T>> markers = selectedItem != null
           ? [
               ..._computeClustersWithMaxDist(visibleItems, _zoom),
