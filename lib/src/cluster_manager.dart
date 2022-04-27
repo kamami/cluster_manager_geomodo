@@ -133,7 +133,8 @@ class ClusterManager<T extends ClusterItem> {
 
     if (stopClusteringZoom != null && _zoom >= stopClusteringZoom!)
       return selectedItem != null
-          ? items.map((i) => Cluster<T>.fromItems([i])).toList() : visibleItems.map((i) => Cluster<T>.fromItems([i])).toList();
+          ? items.map((i) => Cluster<T>.fromItems([i])).toList()
+          : visibleItems.map((i) => Cluster<T>.fromItems([i])).toList();
 
     if (clusterAlgorithm == ClusterAlgorithm.GEOHASH ||
         visibleItems.length >= maxItemsForMaxDistAlgo) {
@@ -143,8 +144,13 @@ class ClusterManager<T extends ClusterItem> {
           level: level);
       return markers;
     } else {
-      print("Right IF ELSE");
-      print("SelectedITem: $selectedItem");
+   
+
+      if (selectedItem != null) {
+        print("SelectedITem: ${selectedItem!.id}");
+      } else {
+        print("Selected Item NULL");
+      }
       List<Cluster<T>> markers = selectedItem != null
           ? [
               ..._computeClustersWithMaxDist(visibleItems, _zoom),
