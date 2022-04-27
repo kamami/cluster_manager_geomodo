@@ -136,8 +136,8 @@ class ClusterManager<T extends ClusterItem> {
           level: level);
       return markers;
     } else {
-      List<Cluster<T>> markers =
-          [..._computeClustersWithMaxDist(visibleItems, _zoom), Cluster<T>.fromItems([selectedItem!])];
+      List<Cluster<T>> markers = selectedItem != null ?
+          [..._computeClustersWithMaxDist(visibleItems, _zoom), Cluster<T>.fromItems([selectedItem!])] : _computeClustersWithMaxDist(visibleItems, _zoom);
       return markers;
     }
   }
