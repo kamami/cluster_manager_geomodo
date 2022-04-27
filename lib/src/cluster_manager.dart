@@ -16,14 +16,14 @@ class MaxDistParams {
 }
 
 class ClusterManager<T extends ClusterItem> {
-  ClusterManager(this._items, this.updateMarkers,
+  ClusterManager(this._items, this._selectedItem, this.updateMarkers, 
       {Future<Marker> Function(Cluster<T>)? markerBuilder,
       this.levels = const [1, 4.25, 6.75, 8.25, 11.5, 14.5, 16.0, 16.5, 20.0],
       this.extraPercent = 0.5,
       this.maxItemsForMaxDistAlgo = 200,
       this.clusterAlgorithm = ClusterAlgorithm.GEOHASH,
       this.maxDistParams,
-      this.selectedItem,
+      
       this.stopClusteringZoom})
       : this.markerBuilder = markerBuilder ?? _basicMarkerBuilder,
         assert(levels.length <= precision);
@@ -48,7 +48,6 @@ class ClusterManager<T extends ClusterItem> {
 
   final MaxDistParams? maxDistParams;
 
-  final T? selectedItem;
 
   /// Zoom level to stop cluster rendering
   final double? stopClusteringZoom;
@@ -62,6 +61,11 @@ class ClusterManager<T extends ClusterItem> {
   /// List of items
   Iterable<T> get items => _items;
   Iterable<T> _items;
+
+
+     T? get selectedItem => _selectedItem;
+     T? _selectedItem;
+
 
   /// Last known zoom
   late double _zoom;
