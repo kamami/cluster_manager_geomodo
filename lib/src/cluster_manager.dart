@@ -109,7 +109,7 @@ class ClusterManager<T extends ClusterItem> {
     }
   }
 
-  void changeSelectedItem(T newItem) {
+  void changeSelectedItem(T? newItem) {
     _selectedItem = newItem;
     updateMap();
   }
