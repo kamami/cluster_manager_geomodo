@@ -64,7 +64,7 @@ class ClusterManager<T extends ClusterItem> {
   T? _selectedItem;
 
   /// Last known zoom
-   double _zoom = 14;
+  double _zoom = 14;
 
   // final double _maxLng = 180 - pow(10, -10.0) as double;
 
@@ -81,6 +81,7 @@ class ClusterManager<T extends ClusterItem> {
   }
 
   void _updateClusters() async {
+    print("Update_Cluster");
     List<Cluster<T>> mapMarkers = await getMarkers();
 
     final Set<Marker> markers =
@@ -144,8 +145,6 @@ class ClusterManager<T extends ClusterItem> {
           level: level);
       return markers;
     } else {
-   
-
       if (selectedItem != null) {
         print("SelectedITem: ${selectedItem!.id}");
       } else {
