@@ -57,7 +57,6 @@ class DistUtils {
     double dist = getDistanceFromLatLonInKm(point1.latitude, point1.longitude,
             point2.latitude, point2.longitude) /
         (meterPerPixel / _thd);
-    // print("dist is $x");
     distCache[_Tuple(point1, point2)] = dist;
     return dist;
   }

@@ -81,8 +81,8 @@ class ClusterManager<T extends ClusterItem> {
   }
 
   void _updateClusters() async {
-    print("Update_Cluster");
     List<Cluster<T>> mapMarkers = await getMarkers();
+
 
     final Set<Marker> markers =
         Set.from(await Future.wait(mapMarkers.map((m) => markerBuilder(m))));
@@ -145,11 +145,7 @@ class ClusterManager<T extends ClusterItem> {
           level: level);
       return markers;
     } else {
-      if (selectedItem != null) {
-        print("SelectedITem: ${selectedItem!.id}");
-      } else {
-        print("Selected Item NULL");
-      }
+   
       List<Cluster<T>> markers = selectedItem != null
           ? [
               ..._computeClustersWithMaxDist(visibleItems, _zoom),
@@ -238,9 +234,7 @@ class ClusterManager<T extends ClusterItem> {
         return Marker(
           markerId: MarkerId(cluster.getId()),
           position: cluster.location,
-          onTap: () {
-            print(cluster);
-          },
+        
           icon: await _getBasicClusterBitmap(cluster.isMultiple ? 125 : 75,
               text: cluster.isMultiple ? cluster.count.toString() : null),
         );

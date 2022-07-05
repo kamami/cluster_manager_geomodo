@@ -12,7 +12,6 @@ void main() {
       final DistUtils utils = DistUtils();
       double dist = utils.getDistanceFromLatLonInKm(
           start.latitude, start.longitude, end.latitude, end.longitude);
-      print("dist is $dist");
       expect(dist >= 0.6 && dist <= 0.8, true);
     });
 
@@ -24,7 +23,6 @@ void main() {
       final DistUtils utils = DistUtils();
       double dist = utils.getDistanceFromLatLonInKm(
           start.latitude, start.longitude, end.latitude, end.longitude);
-      print("dist is $dist");
       expect(dist >= 75 && dist <= 80, true);
     });
 
@@ -34,7 +32,6 @@ void main() {
       final DistUtils utils = DistUtils();
 
       double dist = utils.getLatLonDist(start, end, 16);
-      print("dist is $dist ${75 / 2.387 * 1000} ${80 / 2.387 * 1000}");
       expect(dist >= 75 / 2.387 * 1000 && dist <= 80 / 2.387 * 1000, true);
     });
   });
